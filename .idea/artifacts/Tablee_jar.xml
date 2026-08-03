@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tablee:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tablee_jar</output-path>
+    <root id="archive" name="Tablee.jar">
+      <element id="module-output" name="Tablee" />
+    </root>
+  </artifact>
+</component>
