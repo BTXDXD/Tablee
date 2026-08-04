@@ -11,7 +11,7 @@ public class TableBaseSimple {
         this.type = type;
     }
 
-    public String getName() {
+    public String getTableName() {
         return this.name;
     }
 
