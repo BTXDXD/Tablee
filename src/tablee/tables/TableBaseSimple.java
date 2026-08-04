@@ -15,7 +15,7 @@ public class TableBaseSimple {
         return this.name;
     }
 
-    public TableTypes getType() {
+    public TableTypes getTableType() {
         return this.type;
     }
 
