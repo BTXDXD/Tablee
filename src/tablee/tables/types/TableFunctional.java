@@ -10,7 +10,7 @@ public final class TableFunctional extends TableBase {
     private final ArrayList<TableVariable> args;
 
     public TableFunctional(String name, ArrayList<TableVariable> args) {
-        super(name, TableTypes.FUNCTIONAL);
+        super(name, TableTypes.Functional);
         this.args = new ArrayList<>(args);
     }
 

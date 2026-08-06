@@ -48,7 +48,8 @@ public class Tablee {
         if (argsList.contains("--help")) {System.out.println(help); return;}
         else if (argsList.contains("--version")) {System.out.println(version); return;}
 
-        if (argsList.contains("--tabDebug")) {Engine.tableeDebugMode = true;}
+        if (argsList.contains("--tabDebug")) {
+            Engine.tableeDebugMode = true;}
 
         for (String arg : args) {
             if (arg.equals("--help") || arg.equals("--version") || arg.equals("--tabDebug")) continue;

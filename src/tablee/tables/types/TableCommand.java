@@ -6,7 +6,7 @@ import tablee.tables.TableTypes;
 public final class TableCommand extends TableBaseSimple {
 
     public TableCommand(String name) {
-        super(name, TableTypes.COMMAND);
+        super(name, TableTypes.Command);
     }
 
 }

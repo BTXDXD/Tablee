@@ -6,7 +6,7 @@ import tablee.tables.TableTypes;
 public final class TableTabular extends TableBase {
 
     public TableTabular(String name) {
-        super(name, TableTypes.TABULAR);
+        super(name, TableTypes.Tabular);
     }
 
 }
