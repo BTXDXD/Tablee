@@ -1,7 +1,7 @@
 package tablee.runtime;
 
+import tablee.packages.PackageBase;
 import tablee.runtime.bytecode.Executor;
-import tablee.runtime.bytecode.Opcodes;
 import tablee.runtime.exceptions.FileNotFoundError;
 import tablee.runtime.exceptions.FileReadError;
 import tablee.runtime.exceptions.InvalidFilePathError;
@@ -13,19 +13,22 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Consumer;
 
 public final class Engine {
 
     public static boolean tableeDebugMode = false;
 
-    private static Consumer<String> errorHandler = System.err::println;
-    private static Consumer<String> outputHandler = System.out::println;
+    private static Consumer<String> errorHandler = System.err::print;
+    private static Consumer<String> outputHandler = System.out::print;
 
     private static final TableTabular globalTable = new TableTabular("Global");
 
     private Engine() {}
+
+    public static void registerPackage(PackageBase pkg) {
+        globalTable.addSubtable(pkg.getPackageRootTable());
+    }
 
     public static void addFile(String filePath) {
         runSafely(() -> {
@@ -40,12 +43,17 @@ public final class Engine {
         runSafely(() -> addTable(tableName, code));
     }
 
+    public static TableTabular getGlobalTable() {
+        return globalTable;
+    }
+
     private static void addTable(String tableName, String code) {
         TableTabular newTable = new TableTabular(tableName);
         globalTable.addSubtable(newTable);
         // parse(newTable) -> convertToBytecode() :ret List<Opcodes>
-        List<Opcodes> opcodesList = List.of();
-        Executor executor = new Executor(opcodesList);
+        byte[] bytecode = new byte[0];
+        Object[] constantPool = new Object[0];
+        Executor executor = new Executor(bytecode, constantPool);
         executor.execute();
     }
 
@@ -97,11 +105,11 @@ public final class Engine {
     }
 
     public static void setErrorHandler(Consumer<String> handler) {
-        errorHandler = (handler != null) ? handler : System.err::println;
+        errorHandler = (handler != null) ? handler : System.err::print;
     }
 
     public static void setOutputHandler(Consumer<String> handler) {
-        outputHandler = (handler != null) ? handler : System.out::println;
+        outputHandler = (handler != null) ? handler : System.out::print;
     }
 
     public static void print(String message) {
