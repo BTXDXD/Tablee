@@ -1,5 +1,6 @@
 package tablee;
 
+import tablee.packages.stdlib.IOPackage;
 import tablee.runtime.Config;
 import tablee.runtime.Engine;
 
@@ -66,10 +67,15 @@ public class Tablee {
         }
 
         if (Files.exists(Path.of(mainFilePath))) {
+            registerBasePackages();
             Engine.addFile(mainFilePath);
         } else {
             System.out.println("File not found: " + mainFilePath);
         }
+    }
+
+    private static void registerBasePackages() {
+        new IOPackage();
     }
 
 }

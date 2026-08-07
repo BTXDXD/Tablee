@@ -1,0 +1,26 @@
+new template User {
+    const string realName;
+    integer age;
+
+    extendable hobbies {
+        boolean isProgrammer;
+        boolean isMusician;
+        boolean isDesigner;
+    };
+
+    extendable(boolean, const string) facts;
+};
+
+new Users {
+    new User btxdxd {
+        realName = "Vladislav";
+        age = 16;
+
+        hobbies.isProgrammer = true;
+        hobbies.isMusician = true;
+
+        facts.add(
+            new const boolean isLovesTablee = true;
+        );
+    };
+};

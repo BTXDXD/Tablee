@@ -14,7 +14,7 @@ public class Test {
         TableFunctional printlnFunctionalTable = Engine.getGlobalTable().findFunctionalTable("io.println");
 
         if (printlnFunctionalTable == null) {
-            System.err.println("Ошибка: Функция io.println не найдена в globalTable!");
+            System.err.println("Ошибка: Функция io.println не найдена в Global!");
             return;
         }
 
@@ -23,8 +23,8 @@ public class Test {
         };
 
         byte[] bytecode = new byte[] {
-                Opcodes.PUSH_CS.getCode(), (byte) 0,
-                Opcodes.CALL_FT.getCode(), (byte) 1
+                // Opcodes.PUSH_CS.getCode(), (byte) 0,
+                // Opcodes.CALL_FT.getCode(), (byte) 1
         };
 
         Executor executor = new Executor(bytecode, constantPool);

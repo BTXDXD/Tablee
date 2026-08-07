@@ -4,8 +4,17 @@ import tablee.runtime.exceptions.UnknownOpcodeError;
 
 public enum Opcodes {
 
-    CALL_FT((byte) 0), // CallFunctionalTable
-    PUSH_CS((byte) 1); // PushConstant
+    VaultAdd((byte) 0), // Object obj
+    //1-4
+    NewFunctionalTable((byte) 5), // String name, List<TableVariable> args
+    NewTabularTable((byte) 6), // String name
+    NewVariableTable((byte) 7), // String name, VariableTypes type, boolean isConst
+    //8-9
+    If((byte) 10), // Boolean logic
+    Do((byte) 11), // Object obj
+    LoopContinue((byte) 12),
+
+    ;////////////////////////////////////
 
     private final byte code;
     private static final Opcodes[] BYTES_MAP = values();
