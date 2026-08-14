@@ -12,7 +12,7 @@ new template User {
 };
 
 new Users {
-    new User btxdxd {
+    extend User new btxdxd {
         realName = "Vladislav";
         age = 16;
 
