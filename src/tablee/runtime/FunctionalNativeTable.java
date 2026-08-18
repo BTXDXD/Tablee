@@ -4,5 +4,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface FunctionalNativeTable {
-    void execute(List<Object> args);
+    Object execute(List<Object> args);
 }

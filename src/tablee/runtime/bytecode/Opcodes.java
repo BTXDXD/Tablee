@@ -4,28 +4,59 @@ import tablee.runtime.exceptions.UnknownOpcodeError;
 
 public enum Opcodes {
 
-    VaultAdd((byte) 0), // Object obj
-    //1-4
-    NewFunctionalTable((byte) 5), // String name, List<TableVariable> args
-    NewTabularTable((byte) 6), // String name
-    NewVariableTable((byte) 7), // String name, VariableTypes type, boolean isConst
-    //8-9
-    If((byte) 10), // Boolean logic
-    Do((byte) 11), // Object obj
-    LoopContinue((byte) 12),
+    Not((byte) 0),
+    PushConstant((byte) 1),
+    LoadConstant((byte) 2),
+    Duplicate((byte) 3),
+    Pop((byte) 4),
 
-    ;////////////////////////////////////
+    NewTabularTable((byte) 5),
+    NewTemplateTable((byte) 6),
+    NewFunctionalTable((byte) 7),
+    NewVariableTable((byte) 8),
+
+    NewExtendableTabularTable((byte) 10),
+    NewExtendableTemplateTable((byte) 11),
+    NewConstantVariableTable((byte) 12),
+
+    GetVariableTableValue((byte) 13),
+    SetVariableTableValue((byte) 14),
+    CallFunctionalTable((byte) 15),
+    AddSubtable((byte) 16),
+    EnterTable((byte) 17),
+    LeaveTable((byte) 18),
+    Return((byte) 19),
+
+    Equal((byte) 20),   // ==
+    Less((byte) 21),    // <
+    Greater((byte) 22), // >
+
+    JumpIfFalse((byte) 25),
+    Jump((byte) 26),
+
+    Add((byte) 30),      // +
+    Subtract((byte) 31), // -
+    Multiply((byte) 32), // *
+    Divide((byte) 33),   // /
+    Modulo((byte) 34),   // %
+    ;
 
     private final byte code;
-    private static final Opcodes[] BYTES_MAP = values();
+    private static final Opcodes[] BYTES_MAP = new Opcodes[256];
+
+    static {
+        for (Opcodes op : values())
+            BYTES_MAP[op.code & 0xFF] = op;
+    }
 
     Opcodes(byte code) {
         this.code = code;
     }
 
     public static Opcodes fromByte(byte b) {
-        if (b >= 0 && b < BYTES_MAP.length)
-            return BYTES_MAP[b];
+        int index = b & 0xFF;
+        Opcodes op = BYTES_MAP[index];
+        if (op != null) return op;
         throw new UnknownOpcodeError(b);
     }
 

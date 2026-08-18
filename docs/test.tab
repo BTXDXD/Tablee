@@ -1,26 +1,54 @@
-new template User {
-    const string realName;
-    integer age;
-
-    extendable hobbies {
-        boolean isProgrammer;
-        boolean isMusician;
-        boolean isDesigner;
-    };
-
-    extendable(boolean, const string) facts;
+new GlobalPlayerData {
+    new const float baseSpeed = 1.0;
+    new const integer baseMaxHP = 100;
 };
 
-new Users {
-    extend User new btxdxd {
-        realName = "Vladislav";
-        age = 16;
+new template Player {
+    new const string name; // = "";
+    new float walkSpeed = GlobalPlayerData.baseSpeed.get();
+    new integer maxHP = GlobalPlayerData.baseMaxHP.get();
+};
 
-        hobbies.isProgrammer = true;
-        hobbies.isMusician = true;
+new template BaseWorld extend World; // not extendable
 
-        facts.add(
-            new const boolean isLovesTablee = true;
-        );
+new extendable template World {
+    new const string name; // = "";
+    new const float temperature = Limits.setFloatLimit(0, -1, 1); // base, min, max
+    new float maxHeight = 256;
+    new float minHeight = -64;
+};
+
+new Game {
+    new Players[Player]; // extendable by Player
+    new Worlds[BaseWorld, World]; // extendable by BaseWorld and World
+    new xyNone[]; // extendable by any templates!
+    new const xy[] = [ // not extendable
+        new const integer x;
+        new const integer y;
+    ];
+    new BaseWorld bw;
+
+    new Run() {
+        // ?
     };
+
+    new SendAllWorlds() {
+        new integer i;
+        ?i < Worlds.getLength() {
+            io.println(Worlds.getByPos(i));
+            i++; continue;
+        }
+    }
+
+    new OnJoinedGame(Player ply) {
+        Players.add(ply);
+        io.println("`ply.name.get()` joined the game!");
+    };
+
+    new AddNewWorld(World w) {
+        !Worlds.contains(bw) Worlds.add(bw);
+        Worlds.add(w.add(new const boolean isWorld = true;););
+    };
+
+    Run();
 };

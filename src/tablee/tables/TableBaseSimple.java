@@ -4,7 +4,7 @@ public class TableBaseSimple {
 
     private final String name;
     private final TableTypes type;
-    TableBase parent;
+    public TableBase parent;
 
     protected TableBaseSimple(String name, TableTypes type) {
         this.name = name;
